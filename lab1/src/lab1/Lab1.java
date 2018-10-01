@@ -10,13 +10,37 @@ public class Lab1 {
         Scanner in = new Scanner(System.in);
         System.out.println("Введите размерность массива");
         int n = in.nextInt();
+        proverka_otrecateli(n);
+        tabl_operatos();//Выведение меню
         short mas[] = new short[n];
-        mas_in(mas);
-        mas_left(mas);
-        mas_right(mas);
-        mas_div(mas);
-        mas_nechet(mas);
-        
+        int op;// Переменная для функции stwitch
+        do{
+           op = in.nextInt();
+          switch(op)
+          { 
+             case 1:
+                   mas_in(mas);
+                   break;
+             case 2:
+                   mas_left(mas);
+                   break;
+             case 3:
+                   mas_right(mas);
+                   break;
+             case 4:
+                   mas_div(mas);
+                   break;
+             case 5: 
+                   mas_nechet(mas);
+                   break;
+             case 6:
+                   System.exit(0);
+                   break;
+            default:
+                System.out.println(op +" Данный символ не поддерживается");
+          }
+         
+        }while(op != 6);
     }
     
     
@@ -84,4 +108,22 @@ public class Lab1 {
             System.out.println(mas[i] + " ");
         }
     }
-}
+    static void tabl_operatos(){
+        System.out.println("Выберите действие(нажатие клавиш: 1,2,3,4,5,6) \n"
+                +"1 = Введите эементы массива \n"
+                + "2 = Массив слева направо \n"
+                + "3 = Массив справа налево \n"
+                + "4 = Количество элементов массива,у которых количество делителей меньше заданного значения \n"
+                + "5 = Массмв только с чётными элементами \n"
+                + "6 = Выход \n");
+    }
+    static void  proverka_otrecateli(int n){
+        if (n <= 0)
+        {
+            System.out.println(" Размерность не может быть отрицательной");
+            System.exit(0);
+        }
+        
+    }
+}  
+
