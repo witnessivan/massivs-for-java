@@ -1,129 +1,146 @@
 
 package lab1;
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class Lab1 {
 
     
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        System.out.println("Введите размерность массива");
-        int n = in.nextInt();
-        proverka_otrecateli(n);
+        Scanner input = new Scanner(System.in);     
         tabl_operatos();//Выведение меню
-        short mas[] = new short[n];
-        int op;// Переменная для функции stwitch
-        do{
-           op = in.nextInt();
-          switch(op)
+        int size = 0;
+        short array[] =null;
+        int select;// Переменная для функции stwitch
+        do
+        {
+           select = input.nextInt();
+          switch(select)
           { 
-             case 1:
-                   mas_in(mas);
-                   break;
-             case 2:
-                   mas_left(mas);
-                   break;
-             case 3:
-                   mas_right(mas);
-                   break;
-             case 4:
-                   mas_div(mas);
-                   break;
-             case 5: 
-                   mas_nechet(mas);
-                   break;
-             case 6:
-                   System.exit(0);
-                   break;
+            case 0:
+                array = size_array(array);              
+                break;
+            case 1:
+                mas_in(array,size);
+                break;
+            case 2:
+                mas_left(array,size);
+                break;
+            case 3:
+                mas_right(array,size);
+                break;
+            case 4:
+                mas_div(array,size);
+                break;
+            case 5: 
+                mas_nechet(array,size);
+                break;
+            case 6:
+                break;
             default:
-                System.out.println(op +" Данный символ не поддерживается");
+                System.out.println("Error");
           }
          
-        }while(op != 6);
+        }while(select != 6);
     }
-    
-    
-    
-    
-    static void mas_in(short mas[]){
-        Scanner in = new Scanner(System.in);
+    static void mas_in(short array[],int size)
+    {
+        Scanner input = new Scanner(System.in);
         System.out.println("Введите элементы массива");
-        for(int i = 0; i < mas.length; i++){
-            mas[i] =in.nextShort();
+        for(int index = 0; index < array.length; index++)
+        {
+            array[index] =input.nextShort();
         }
     
     }
-    static void mas_left(short mas[]){
+    static void mas_left(short array[],int size){
         System.out.println("Массив слева направо");
-        for(int i = 0; i < mas.length; i++){
-            System.out.println(mas[i] + " ");
+        for(int index = 0; index < array.length; index++)
+        {
+            System.out.println(array[index] + " ");
         }
     }
-    static void mas_right(short mas[]){
+    static void mas_right(short array[],int size){
         System.out.println("Массив справа налево");
-        for(int i = mas.length - 1; i !=-1; i--){
-           System.out.println(mas[i] + " ");
+        for(int index = array.length - 1; index !=-1; index--){
+           System.out.println(array[index] + " ");
         }
     }
-    static void mas_div(short mas[]){
+    static void mas_div(short array[],int size)
+    {
         Scanner in = new Scanner(System.in);
         int z = 0;
         int k = 0;
         System.out.println("Введите делитель");
         int div = in.nextInt();
-        for(int i = 0;i < mas.length ; i++){
-           for(short c = 1;c < mas[i];c++){
-               if(mas[i]/c == 0){
+        for(int index = 0;index < array.length ; index++)
+        {
+           for(short c = 1;c < array[index];c++)
+           {
+               if(array[index]/c == 0)
+               {
                   k++;
                }
            }
-            if(k < div){
+           if(k < div)
+           {
                z++;
-            }    
+           }    
         }
         System.out.println("Количество элементов массива,у которых количество делителей меньше заданного значения = " + z);
     }
-    static void mas_nechet(short mas[]){
+    static void mas_nechet(short array[],int size)
+    {
         System.out.println("Массмв только с чётными элементами");
-        for(int i = 0; i < mas.length; i++){
+        for(int index = 0; index < array.length; index++)
+        {
             
             int k = 0;
-           int c = mas[i];
+           int c = array[index];
            while(c!=0){
                k = c%10;
                c = c/10; 
                
            }
-           if(k%2 ==0){
-               mas[i] = mas[i];
+           if(k%2 ==0)
+           {
+               
            }
            else{
-               mas[i] = 0;
+               array[index] = 0;
            } 
              
             
         }
-        for(int i = 0; i< mas.length;i++){
-            System.out.println(mas[i] + " ");
+        for(int index = 0; index< array.length;index++){
+            System.out.println(array[index] + " ");
         }
     }
-    static void tabl_operatos(){
-        System.out.println("Выберите действие(нажатие клавиш: 1,2,3,4,5,6) \n"
-                +"1 = Введите эементы массива \n"
-                + "2 = Массив слева направо \n"
-                + "3 = Массив справа налево \n"
-                + "4 = Количество элементов массива,у которых количество делителей меньше заданного значения \n"
+    static void tabl_operatos()
+    {
+        System.out.println("Выберите действие: \n"
+                + "0 - Введите размерность массива \n"
+                + "1 - Введите эементы массива \n"
+                + "2 - Массив слева направо \n"
+                + "3 - Массив справа налево \n"
+                + "4 - Количество делителей меньше заданного значения \n"
                 + "5 = Массмв только с чётными элементами \n"
                 + "6 = Выход \n");
     }
-    static void  proverka_otrecateli(int n){
-        if (n <= 0)
+    static short[] size_array(short array[])
+    {
+        int size;
+        System.out.println("Введите размерность массива");
+        Scanner input = new Scanner(System.in);
+        size = input.nextInt();
+        if(size > 0)
         {
-            System.out.println(" Размерность не может быть отрицательной");
-            System.exit(0);
+            array = new short[size];//Размерность масства
         }
-        
+        else
+        {
+            System.out.println("Введено неверное значение");
+        }
+        return array;
     }
 }  
 
